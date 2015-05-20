@@ -7,6 +7,8 @@
 
 from random import randrange
 
+## define a Battleship class with preset labels
+##   assume most people want to play standard Battleship
 class Battleship :
     boardLetters = "ABCDEFGHIJ"
     boardNumbers = " 1 2 3 4 5 6 7 8 9 10 "
@@ -27,10 +29,12 @@ class Battleship :
         """creates a string representation of the board, which is now thankfully a list"""
         WIDTH = self.width
         HEIGHT = self.height
-        let = Battleship.boardLetters
+        letter = Battleship.boardLetters
+
+        ## fancy formatting for game board
         board = "  " + Battleship.boardNumbers[0:21] + "\n"
         for row in range(HEIGHT):
-            board += let[row:row+1] + " |"
+            board += letter[row:row+1] + " |"
             for col in range(WIDTH):
                 board += self.data[row][col] + "|"
             board += "\n"
@@ -38,7 +42,8 @@ class Battleship :
         
 
     def move(self, symbol, col) :
-        # make move of form 'A3', then reset available moves
+        """takes in a Battleship node, letter symbol (row) and column number
+         makes move of form 'A3', then reset available moves"""
         row = ord(symbol) % 65
         self.data[row][int(col) - 1] = "X"       
         self.legalMoves()
@@ -47,7 +52,7 @@ class Battleship :
 
 
     def legalMoves(self) :
-        # sets list of empty positions, self.moves
+        """ sets list of empty positions, called self.moves"""
         moves = []
         WIDTH = self.width
         for row in range(len(self.data)):
@@ -576,6 +581,13 @@ class Battleship :
             if self.ships[i] == 3:
                 threeCount += 1
         return threeCount
+
+
+
+
+node = Battleship(10,10)
+node.playGame()
+    
                 
  
         
